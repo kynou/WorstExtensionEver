@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Worst Extension Ever",
+  "version": "1.0.0",
+  "description": "The absolute worst visual experience for the web. Apply atrocious themes, trigger layout earthquakes, and ruin websites.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "icons": {
+    "128": "icons/icon128.png"
+  }
+}

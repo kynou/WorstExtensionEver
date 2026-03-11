@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worse Extension Ever</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container" id="mainContainer">
+    <header>
+      <div class="header-main">
+        <h1 class="hide-compact">Worse Extension Ever</h1>
+        <div class="header-actions">
+          <div class="compact-btn-wrapper">
+            <button id="compactToggle" class="icon-btn" title="Toggle Compact Mode">🗜️</button>
+            <div class="compact-dropdown" id="compactDropdown">
+              <div class="compact-dropdown-inner">
+                <div class="compact-dropdown-item" data-episode="episode1">Ep 1: Search</div>
+                <div class="compact-dropdown-item" data-episode="episode2">Ep 2: Earthquake</div>
+                <div class="compact-dropdown-item" data-episode="episode3">Ep 3: Magnifier</div>
+                <div class="compact-dropdown-item" data-episode="episode4">Ep 4: AI Controller</div>
+                <div class="compact-dropdown-item" data-episode="episode5">Ep 5: Light Switch</div>
+                <div class="compact-dropdown-item" data-episode="episode6">Ep 6: Dev Console</div>
+                <div class="compact-dropdown-item" data-episode="episode7">Ep 7: URL Parser</div>
+                <div class="compact-dropdown-item" data-episode="episode8">Ep 8: Themes</div>
+              </div>
+            </div>
+          </div>
+          <button id="themeToggle" class="icon-btn" title="Toggle Theme">🌓</button>
+          <img src="icons/icon128.png" alt="Logo" class="header-logo">
+        </div>
+      </div>
+      <div class="episode-selector-container hide-compact">
+        <select id="episodeSelector" class="episode-select">
+          <option value="episode1">Episode 1: Worst Search Ever</option>
+          <option value="episode2">Episode 2: Worst Earthquake Ever</option>
+          <option value="episode3">Episode 3: Worst Magnifying Glass Ever</option>
+          <option value="episode4">Episode 4: Worst AI Controller Ever</option>
+          <option value="episode5">Episode 5: Worst Light Switch Ever</option>
+          <option value="episode6">Episode 6: Worse Dev Console Ever</option>
+          <option value="episode7">Episode 7: Worse URL Parser Ever</option>
+          <option value="episode8">Episode 8: Worst Theme Selector Ever</option>
+        </select>
+      </div>
+    </header>
+    
+    <main>
+      <!-- Episode 1: Worst Search Ever -->
+      <section id="episode1" class="episode-content">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search for text..." autocomplete="off">
+          <button id="searchBtn">🔍</button>
+        </div>
+        
+        <div class="controls">
+          <div class="toggle-group">
+            <label class="switch">
+              <input type="checkbox" id="multiSpotlight">
+              <span class="slider round"></span>
+            </label>
+            <span>Multi-Spotlight</span>
+          </div>
+          
+          <div class="slider-group hide-compact">
+            <div class="slider-header">
+              <span>Background Dimness</span>
+              <span id="dimnessValue">92%</span>
+            </div>
+            <input type="range" id="dimnessSlider" min="0" max="100" value="92">
+          </div>
+
+          <div class="slider-group hide-compact">
+            <div class="slider-header">
+              <span>Spotlight Size</span>
+              <span id="sizeValue">1.8x</span>
+            </div>
+            <input type="range" id="sizeSlider" min="10" max="50" value="18">
+          </div>
+        </div>
+
+        <div class="navigation hidden" id="navGroup">
+          <div class="stats hide-compact">
+            <span id="currentIdx">0</span> / <span id="totalMatches">0</span>
+          </div>
+          <div class="nav-buttons">
+            <button id="firstBtn" title="First">⏮</button>
+            <button id="prevBtn" title="Previous">◀</button>
+            <button id="nextBtn" title="Next">▶</button>
+            <button id="lastBtn" title="Last">⏭</button>
+            <button id="clearBtnCompact" class="compact-clear-btn" title="Clear Effects">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2.5"
+                   stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="15" y1="9" x2="9" y2="15"/>
+                <line x1="9" y1="9" x2="15" y2="15"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button id="clearBtn" class="secondary-btn hide-compact">Clear Effects</button>
+      </section>
+
+      <!-- Episode 2: Worst Earthquake Ever -->
+      <section id="episode2" class="episode-content">
+        <div class="controls">
+          <div class="slider-group hide-compact">
+            <div class="slider-header">
+              <span>Earthquake Intensity</span>
+              <span id="quakeValue">Medium</span>
+            </div>
+            <input type="range" id="quakeSlider" min="1" max="10" value="5">
+          </div>
+          
+          <div class="info-text hide-compact">
+            Warning: This will physically destroy the website layout.
+          </div>
+
+          <button id="quakeToggleBtn" class="primary-btn-alt">Release the Quake</button>
+        </div>
+      </section>
+
+      <!-- Episode 3: Worst Magnifying Glass Ever -->
+      <section id="episode3" class="episode-content">
+        <div class="controls">
+          <div class="toggle-group">
+            <label class="switch">
+              <input type="checkbox" id="magnifyToggle">
+              <span class="slider round"></span>
+            </label>
+            <span>Enable Magnifier</span>
+          </div>
+
+          <div class="slider-group hide-compact">
+            <div class="slider-header">
+              <span>Background Blur</span>
+              <span id="blurValue">5px</span>
+            </div>
+            <input type="range" id="blurSlider" min="0" max="20" value="5">
+          </div>
+
+          <div class="slider-group hide-compact">
+            <div class="slider-header">
+              <span>Zoom Level</span>
+              <span id="zoomValue">2.0x</span>
+            </div>
+            <input type="range" id="zoomSlider" min="10" max="50" value="20">
+          </div>
+        </div>
+      </section>
+
+      <!-- Episode 4: Worst AI Prompt Controller Ever -->
+      <section id="episode4" class="episode-content">
+        <div class="controls">
+          <div class="info-text hide-compact">
+            Prevent accidental intelligence. Forcefully delay your AI overlords.
+          </div>
+          
+          <div class="toggle-group">
+            <label class="switch">
+              <input type="checkbox" id="chatgptToggle">
+              <span class="slider round"></span>
+            </label>
+            <span>ChatGPT</span>
+          </div>
+
+          <div class="toggle-group">
+            <label class="switch">
+              <input type="checkbox" id="geminiToggle">
+              <span class="slider round"></span>
+            </label>
+            <span>Gemini</span>
+          </div>
+
+          <div class="toggle-group">
+            <label class="switch">
+              <input type="checkbox" id="claudeToggle">
+              <span class="slider round"></span>
+            </label>
+            <span>Claude</span>
+          </div>
+
+          <div class="info-text hide-compact" style="margin-top: 10px; font-style: italic;">
+            "Enter" for new line. "Ctrl+Enter" to submit.
+          </div>
+        </div>
+      </section>
+
+      <!-- Episode 5: Worst Light Switch Ever -->
+      <section id="episode5" class="episode-content">
+        <div class="controls">
+          <div class="info-text hide-compact">
+            Flip the switches to make parts of the web disappear.
+          </div>
+          
+          <button id="scanSwitchesBtn" class="primary-btn-alt">Scan Page</button>
+          
+          <div id="switchesList" class="switches-container">
+            <div class="empty-state">Click scan...</div>
+          </div>
+
+          <button id="resetSwitchesBtn" class="secondary-btn hide-compact">Turn Everything On</button>
+        </div>
+      </section>
+
+      <!-- Episode 6: Worse Dev Console Ever -->
+      <section id="episode6" class="episode-content">
+        <div class="controls">
+          <div class="info-text hide-compact">
+            Finally, a tool that makes web development harder.
+          </div>
+          
+          <div class="toggle-group">
+            <label class="switch">
+              <input type="checkbox" id="episode6Toggle">
+              <span class="slider round"></span>
+            </label>
+            <span>Enable Episode</span>
+          </div>
+
+          <div class="toggle-group" id="devModeGroup" style="opacity: 0.5; pointer-events: none;">
+            <label class="switch">
+              <input type="checkbox" id="devModeToggle">
+              <span class="slider round"></span>
+            </label>
+            <span>Dev Mode</span>
+          </div>
+
+          <div class="info-text hide-compact" style="margin-top: 10px; font-style: italic;">
+            Hover to glow, click to inspect.
+          </div>
+
+          <button id="resetStylesBtn" class="secondary-btn hide-compact">Reset All Changes</button>
+        </div>
+      </section>
+      <!-- Episode 7: Worse URL Parser Ever -->
+      <section id="episode7" class="episode-content">
+        <div class="controls">
+          <div class="info-text hide-compact">
+            Finally, a tool to make URL reading slightly more bearable, then terribly formatted.
+          </div>
+          <button id="parseUrlBtn" class="primary-btn-alt">Parse Current URL</button>
+
+          <div id="urlParsedContainer" class="url-parser-container hidden">
+            <!-- Dynamic fields go here -->
+          </div>
+
+          <div id="urlCopyGroup" class="copy-group hidden">
+            <select id="copyFormatSelect" class="episode-select">
+              <option value="markdown">Markdown</option>
+              <option value="csv">CSV</option>
+              <option value="tsv">TSV</option>
+              <option value="html">HTML Table</option>
+            </select>
+            <button id="copyAllBtn" class="secondary-btn" style="margin-top: 0;">Copy Data</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Episode 8: Worst Theme Selector Ever -->
+      <section id="episode8" class="episode-content">
+        <div class="controls">
+          <div class="info-text hide-compact">Select a theme to drastically ruin this page's aesthetic. Changes are saved per website.</div>
+          
+          <select id="ep8ThemeSelect" class="episode-select" style="margin-bottom: 10px;">
+            <option value="none">No Theme (Boring)</option>
+            <option value="hacker">Hacker (L33t)</option>
+            <option value="retro90s">90s Webmaster</option>
+            <option value="hotdog">Hotdog Stand</option>
+            <option value="deepfried">Deep Fried</option>
+            <option value="cozy">Cozy Reading</option>
+            <option value="highcontrast">High Contrast</option>
+            <option value="cyberpunk">Cyberpunk</option>
+            <option value="pastel">Pastel</option>
+            <option value="eink">E-Ink</option>
+            <optgroup id="ep8CustomThemesGroup" label="Custom Themes">
+              <option disabled id="ep8NoCustomYet">(Save a theme below to see it here)</option>
+            </optgroup>
+          </select>
+
+          <div class="slider-group hide-compact">
+            <div class="slider-header">
+              <span>Font Override</span>
+            </div>
+            <select id="ep8FontFamily" class="episode-select" style="margin-bottom: 5px;">
+              <option value="">Default Font</option>
+              <option value="Georgia, serif">Serif (Cozy)</option>
+              <option value="Arial, sans-serif">Sans-Serif</option>
+              <option value="'Courier New', monospace">Monospace</option>
+              <option value="'Comic Sans MS', cursive">Comic Sans</option>
+              <option value="system-ui">System UI</option>
+            </select>
+            <div style="display: flex; gap: 10px; margin-bottom: 5px; align-items: center;">
+                <span style="min-width: 40px;">Size:</span>
+                <input type="range" id="ep8FontSize" min="50" max="300" value="100" style="flex: 1;">
+                <span id="ep8FontSizeVal" style="min-width: 40px; text-align: right;">100%</span>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <span style="min-width: 40px;">Color:</span>
+                <input type="color" id="ep8FontColor" value="#000000" style="height: 24px; width: 40px; cursor: pointer; padding: 0; border: none; background: transparent;">
+                <label style="display:flex; align-items:center; gap:5px; margin-left:auto;">
+                  <span>Enable</span>
+                  <input type="checkbox" id="ep8FontColorEnable">
+                </label>
+            </div>
+          </div>
+          
+          <div style="display: flex; gap: 10px; margin-bottom: 10px;" class="hide-compact">
+             <input type="text" id="ep8CustomThemeName" placeholder="Theme Name" style="flex: 1; padding: 5px; background: #222; color: #fff; border: 1px solid #555;">
+             <button id="ep8SaveThemeBtn" class="secondary-btn" style="margin: 0; padding: 5px 10px;">Save Custom</button>
+          </div>
+          
+          <div class="toggle-group">
+            <label class="switch">
+              <input type="checkbox" id="ep8ForceDark">
+              <span class="slider round"></span>
+            </label>
+            <span>Force Dark Mode</span>
+          </div>
+
+          <div class="slider-group hide-compact">
+            <div class="slider-header">
+              <span>Brightness</span>
+              <span id="ep8BrightnessVal">100%</span>
+            </div>
+            <input type="range" id="ep8Brightness" min="0" max="200" value="100">
+          </div>
+
+          <div class="slider-group hide-compact">
+            <div class="slider-header">
+              <span>Contrast</span>
+              <span id="ep8ContrastVal">100%</span>
+            </div>
+            <input type="range" id="ep8Contrast" min="0" max="300" value="100">
+          </div>
+
+          <div class="slider-group hide-compact">
+            <div class="slider-header">
+              <span>Hue Rotate</span>
+              <span id="ep8HueVal">0deg</span>
+            </div>
+            <input type="range" id="ep8Hue" min="0" max="360" value="0">
+          </div>
+
+          <div class="slider-group hide-compact">
+            <div class="slider-header">
+              <span>Sepia / Temp</span>
+              <span id="ep8SepiaVal">0%</span>
+            </div>
+            <input type="range" id="ep8Sepia" min="0" max="100" value="0">
+          </div>
+
+          <button id="ep8ResetBtn" class="secondary-btn hide-compact">Reset Page Theme</button>
+        </div>
+      </section>
+    </main>
+    
+    <footer class="hide-compact">
+      <p id="footerSlogan">The worst visual search experience.</p>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
