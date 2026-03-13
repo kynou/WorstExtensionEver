@@ -122,3 +122,137 @@ Google Sites applies the following sandbox permissions to embedded HTML:
 - The `javascript:` URI scheme is treated as a navigation attempt and is therefore blocked
 
 This means inline `onclick` JavaScript **works fine**, but `href="javascript:..."` does **not**.
+
+---
+
+# Fix 2: Download Button Navigates Iframe Instead of Downloading
+
+## Issue Summary
+
+When `WorstExtensionEverHome.html` is embedded in Google Sites, clicking the "Download WorseExtensionEver.zip" button **navigates the sandboxed iframe to the `data:` URI** instead of triggering a file download. This destroys all page content — only the download section remains visible, and a large **white gap** appears below the footer (the Google Sites background showing through).
+
+## Root Cause
+
+The download button used a `data:` URI as its `href`:
+
+```html
+<a href="data:application/zip;base64,UEsDBBQ..." class="btn btn-primary reveal" download="WorseExtensionEver.zip">
+```
+
+In a sandboxed iframe:
+1. The `download` attribute on `<a>` tags requires the `allow-downloads` sandbox permission, which Google Sites does **not** grant.
+2. Without `allow-downloads`, the browser treats the click as a **navigation** to the `data:` URI.
+3. The iframe navigates away from the page content, destroying the rendered HTML.
+
+### White Gap Below Footer
+
+Additionally, the download section used `min-height: 50vh` while all other sections used `min-height: 100vh`. When scrolled to the bottom, the shorter section left the Google Sites white background visible beneath the iframe content.
+
+## The Fix
+
+### Part A: Download Section Height
+
+Changed `min-height` from `50vh` to `100vh` to match all other sections:
+
+**Before:**
+```html
+<section id="download" style="background: #050505; min-height: 50vh;">
+```
+
+**After:**
+```html
+<section id="download" style="background: #050505; min-height: 100vh;">
+```
+
+### Part B: JavaScript Blob Download (WorstExtensionEverHome.html)
+
+Replaced the `data:` URI href with a JavaScript-based download using Blob + Object URL.
+
+1. **Moved the base64 ZIP data** from the `<a>` href into a hidden `<div>` element's `data-zip` attribute:
+```html
+<div id="zip-data" data-zip="UEsDBBQ...base64..." style="display:none;"></div>
+```
+
+2. **Replaced the download button**:
+
+Before:
+```html
+<a href="data:application/zip;base64,..." class="btn btn-primary reveal" download="WorseExtensionEver.zip">Download WorseExtensionEver.zip</a>
+```
+
+After:
+```html
+<a href="#" onclick="downloadZip(); return false;" class="btn btn-primary reveal">Download WorseExtensionEver.zip</a>
+```
+
+3. **Added `downloadZip()` function** at global scope in the `<script>` block:
+```javascript
+function downloadZip() {
+    var zipDataEl = document.getElementById('zip-data');
+    if (!zipDataEl) return false;
+    var base64 = zipDataEl.getAttribute('data-zip');
+    var byteString = atob(base64);
+    var byteArray = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+        byteArray[i] = byteString.charCodeAt(i);
+    }
+    var blob = new Blob([byteArray], { type: 'application/zip' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'WorseExtensionEver.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function() { URL.revokeObjectURL(url); }, 10000);
+    return false;
+}
+```
+
+### Part C: JavaScript Fetch Download (promo.html)
+
+Same pattern for `promo.html`, but uses `fetch()` since the ZIP is a separate file (not embedded):
+```javascript
+function downloadZip() {
+    fetch('WorseExtensionEver.zip')
+        .then(function(r) { return r.blob(); })
+        .then(function(blob) {
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'WorseExtensionEver.zip';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(function() { URL.revokeObjectURL(url); }, 10000);
+        });
+    return false;
+}
+```
+
+## Why This Fix Works
+
+1. **`href="#"`** avoids any navigation to a `data:` URI — it's a safe anchor.
+2. **`return false;`** prevents the default `#` scroll-to-top behavior.
+3. **`URL.createObjectURL(blob)`** creates a same-origin blob URL from the decoded base64 data.
+4. **Programmatic `.click()`** on a dynamically created `<a download="...">` element triggers the download via JavaScript (allowed by `allow-scripts`), bypassing the `allow-downloads` restriction that only applies to user-clicked download-attributed links.
+5. **`setTimeout` revocation** delays cleanup by 10 seconds to ensure the browser has time to initiate the download before the blob URL is revoked.
+
+## Files Modified
+
+| File | Changes |
+|------|---------|
+| `WorstExtensionEverHome.html` | Download section height 50vh→100vh, download button href→onclick+JS, base64 moved to hidden div, added `downloadZip()` function |
+| `promo.html` | Download section height 50vh→100vh, download button href→onclick+JS, added `downloadZip()` function (fetch-based) |
+
+## Verification Steps
+
+### Local Testing
+1. Open `WorstExtensionEverHome.html` directly in a browser
+2. Click "Download WorseExtensionEver.zip" — the ZIP should download, page should remain intact
+3. Scroll to download section — no white gap below footer
+
+### Google Sites Testing
+1. Paste the full contents of `WorstExtensionEverHome.html` into Google Sites embed
+2. Publish and click the download button — ZIP should download without navigating the iframe
+3. Scroll to download section — no white gap below the footer

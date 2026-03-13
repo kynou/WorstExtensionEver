@@ -765,9 +765,9 @@
         <div class="quote-author reveal delay-1">— The Comic Book Guy</div>
     </section>
 
-    <section id="download" style="background: #050505; min-height: 50vh;">
+    <section id="download" style="background: #050505; min-height: 100vh;">
         <h2 class="section-title reveal" style="margin-bottom: 20px;">Ready to ruin your browser?</h2>
-        <a href="WorseExtensionEver.zip" class="btn btn-primary reveal" download>Download WorseExtensionEver.zip</a>
+        <a href="#" onclick="downloadZip(); return false;" class="btn btn-primary reveal">Download WorseExtensionEver.zip</a>
     </section>
 
     <footer style="padding: 40px; text-align: center; border-top: 1px solid #111; color: #555; font-size: 0.9rem;">
@@ -775,6 +775,22 @@
     </footer>
 
     <script>
+        function downloadZip() {
+            fetch('WorseExtensionEver.zip')
+                .then(function(r) { return r.blob(); })
+                .then(function(blob) {
+                    var url = URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'WorseExtensionEver.zip';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    setTimeout(function() { URL.revokeObjectURL(url); }, 10000);
+                });
+            return false;
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
