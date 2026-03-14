@@ -97,7 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'lastEpisode', 'isCompact', 'multiSpotlight', 'dimness', 'sizeScale', 
       'quakeIntensity', 'magnifyActive', 'magnifierBlur', 'magnifierZoom',
       'geminiEnabled', 'chatgptEnabled', 'claudeEnabled', 'urlSwitchStates',
-      'episode6Enabled', 'devModeEnabled', 'ep8Settings', 'ep8CustomThemes'
+      'episode6Enabled', 'devModeEnabled', 'ep8Settings', 'ep8CustomThemes',
+      'ep8ApplyAllPages', 'ep8GlobalSettings'
     ];
 
     chrome.storage.local.get(keys, (res) => {
@@ -163,12 +164,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
+      // Episode 8: Apply All Pages toggle
+      if (res.ep8ApplyAllPages !== undefined) {
+        document.getElementById('ep8ApplyAllPages').checked = res.ep8ApplyAllPages;
+      }
+
       getHostname((hostname) => {
         if (hostname && res.urlSwitchStates && res.urlSwitchStates[hostname]) {
           renderSwitches(res.urlSwitchStates[hostname], hostname);
         }
-        if (hostname && res.ep8Settings && res.ep8Settings[hostname]) {
-          const s = res.ep8Settings[hostname];
+        // Use global settings if "apply all pages" is on, otherwise per-hostname
+        const ep8Source = res.ep8ApplyAllPages && res.ep8GlobalSettings
+          ? res.ep8GlobalSettings
+          : (hostname && res.ep8Settings && res.ep8Settings[hostname])
+            ? res.ep8Settings[hostname]
+            : null;
+        if (ep8Source) {
+          const s = ep8Source;
           document.getElementById('ep8ThemeSelect').value = s.theme || 'none';
           document.getElementById('ep8ForceDark').checked = s.forceDark || false;
           document.getElementById('ep8Brightness').value = s.brightness !== undefined ? s.brightness : 100;
@@ -674,6 +686,10 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const saveEp8Settings = (settings) => {
+    const applyAll = document.getElementById('ep8ApplyAllPages').checked;
+    if (applyAll) {
+      chrome.storage.local.set({ ep8GlobalSettings: settings });
+    }
     getHostname((hostname) => {
       if (hostname) {
         chrome.storage.local.get(['ep8Settings'], (res) => {
@@ -683,8 +699,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     });
-    sendMessageToContentScript({ type: 'EP8_UPDATE', settings });
+    sendMessageToContentScript({ type: 'EP8_UPDATE', settings, applyAll });
   };
+
+  // Episode 8: Apply All Pages toggle
+  document.getElementById('ep8ApplyAllPages').addEventListener('change', (e) => {
+    const applyAll = e.target.checked;
+    chrome.storage.local.set({ ep8ApplyAllPages: applyAll });
+    if (applyAll) {
+      // Save current settings as global immediately
+      updateEp8();
+    }
+  });
 
   const ep8Inputs = ['ep8ThemeSelect', 'ep8ForceDark', 'ep8Brightness', 'ep8Contrast', 'ep8Hue', 'ep8Sepia', 'ep8FontFamily', 'ep8FontSize', 'ep8FontColor', 'ep8FontColorEnable'];
   if (document.getElementById('ep8ThemeSelect')) {

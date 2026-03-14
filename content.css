@@ -52,102 +52,102 @@
    ========================================= */
 
 /* Hacker Theme */
-html.theme-hacker, html.theme-hacker body, html.theme-hacker div, html.theme-hacker p, html.theme-hacker span {
+html.worse-theme-hacker, html.worse-theme-hacker body, html.worse-theme-hacker div, html.worse-theme-hacker p, html.worse-theme-hacker span {
     background-color: #000 !important;
     color: #0f0 !important;
     font-family: "Courier New", Courier, monospace !important;
     border-color: #0f0 !important;
 }
-html.theme-hacker img, html.theme-hacker video, html.theme-hacker iframe {
+html.worse-theme-hacker img, html.worse-theme-hacker video, html.worse-theme-hacker iframe {
     filter: sepia(100%) hue-rotate(80deg) saturate(400%) !important;
 }
 
 /* 90s Webmaster Theme */
-html.theme-retro90s, html.theme-retro90s body {
+html.worse-theme-retro90s, html.worse-theme-retro90s body {
     background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAKrVq36zwjjgzhhYWGMYAEYB8RmROaABADeOQ8CXl/xfgAAAABJRU5ErkJggg==') repeat !important;
     color: #ffff00 !important;
     font-family: "Comic Sans MS", "Chalkboard SE", sans-serif !important;
     cursor: wait !important;
 }
-html.theme-retro90s a {
+html.worse-theme-retro90s a {
     color: #00ff00 !important;
     text-decoration: blink !important;
     background-color: #0000ff !important;
 }
-html.theme-retro90s div {
+html.worse-theme-retro90s div {
     border: 3px ridge #ff00ff !important;
 }
 
 /* Hotdog Stand Theme */
-html.theme-hotdog, html.theme-hotdog body, html.theme-hotdog div {
+html.worse-theme-hotdog, html.worse-theme-hotdog body, html.worse-theme-hotdog div {
     background-color: #ff0000 !important;
     color: #ffff00 !important;
 }
-html.theme-hotdog a, html.theme-hotdog p, html.theme-hotdog span, html.theme-hotdog h1, html.theme-hotdog h2 {
+html.worse-theme-hotdog a, html.worse-theme-hotdog p, html.worse-theme-hotdog span, html.worse-theme-hotdog h1, html.worse-theme-hotdog h2 {
     color: #000000 !important;
     background-color: #ffff00 !important;
 }
-html.theme-hotdog * {
+html.worse-theme-hotdog * {
     border-color: #000000 !important;
 }
 
 /* Deep Fried Theme */
-html.theme-deepfried {
+html.worse-theme-deepfried {
     transform: skewX(2deg) scale(1.05) !important;
 }
-html.theme-deepfried img, html.theme-deepfried video {
+html.worse-theme-deepfried img, html.worse-theme-deepfried video {
     filter: contrast(300%) saturate(400%) brightness(150%) blur(1px) !important;
 }
-html.theme-deepfried * {
+html.worse-theme-deepfried * {
     text-shadow: 2px 2px 0px #ff0000, -2px -2px 0px #00ff00 !important;
     box-shadow: 0 0 10px 5px #ff00ff !important;
 }
 
 /* Force Dark Mode Media Fixes */
-html.theme-force-dark img, html.theme-force-dark video, html.theme-force-dark iframe, html.theme-force-dark canvas {
-    /* If force dark is on, we invert the page in JS filter. 
+html.worse-theme-force-dark img, html.worse-theme-force-dark video, html.worse-theme-force-dark iframe, html.worse-theme-force-dark canvas {
+    /* If force dark is on, we invert the page in JS filter.
        We must re-invert media so it doesn't look like a negative film. */
     filter: invert(100%) hue-rotate(180deg) !important;
 }
 
 /* Cozy Theme */
-html.theme-cozy, html.theme-cozy body {
+html.worse-theme-cozy, html.worse-theme-cozy body {
     background-color: #fdf6e3 !important;
     color: #4c4a41 !important;
 }
-html.theme-cozy * {
+html.worse-theme-cozy * {
     border-color: #d6cfb8 !important;
 }
 
 /* High Contrast Theme */
-html.theme-highcontrast, html.theme-highcontrast body, html.theme-highcontrast div, html.theme-highcontrast p {
+html.worse-theme-highcontrast, html.worse-theme-highcontrast body, html.worse-theme-highcontrast div, html.worse-theme-highcontrast p {
     background-color: #000 !important;
     color: #fff !important;
 }
-html.theme-highcontrast a { color: #ffff00 !important; text-decoration: underline !important; }
-html.theme-highcontrast * { border-color: #fff !important; }
+html.worse-theme-highcontrast a { color: #ffff00 !important; text-decoration: underline !important; }
+html.worse-theme-highcontrast * { border-color: #fff !important; }
 
 /* Cyberpunk Theme */
-html.theme-cyberpunk, html.theme-cyberpunk body {
+html.worse-theme-cyberpunk, html.worse-theme-cyberpunk body {
     background-color: #0d0221 !important;
     color: #ff00ff !important;
 }
-html.theme-cyberpunk a { color: #00ffff !important; text-shadow: 0 0 5px #00ffff !important; }
-html.theme-cyberpunk div { border: 1px solid #ff00ff !important; box-shadow: inset 0 0 10px #ff00ff !important; }
+html.worse-theme-cyberpunk a { color: #00ffff !important; text-shadow: 0 0 5px #00ffff !important; }
+html.worse-theme-cyberpunk div { border: 1px solid #ff00ff !important; box-shadow: inset 0 0 10px #ff00ff !important; }
 
 /* Pastel Theme */
-html.theme-pastel, html.theme-pastel body {
+html.worse-theme-pastel, html.worse-theme-pastel body {
     background-color: #ffdfd3 !important;
     color: #957dad !important;
 }
-html.theme-pastel div { background-color: #e0bbe4 !important; border: none !important; border-radius: 10px !important; }
-html.theme-pastel a { color: #d291bc !important; }
+html.worse-theme-pastel div { background-color: #e0bbe4 !important; border: none !important; border-radius: 10px !important; }
+html.worse-theme-pastel a { color: #d291bc !important; }
 
 /* E-Ink Theme */
-html.theme-eink {
+html.worse-theme-eink {
     filter: grayscale(100%) contrast(150%) !important;
 }
-html.theme-eink, html.theme-eink body {
+html.worse-theme-eink, html.worse-theme-eink body {
     background-color: #e5e5e5 !important;
     color: #1a1a1a !important;
 }

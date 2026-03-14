@@ -156,8 +156,10 @@ const initContentScript = () => {
       claudeEnabled: res.claudeEnabled || false
     };
 
-    chrome.storage.local.get(['ep8Settings'], (ep8Res) => {
-      if (ep8Res.ep8Settings && ep8Res.ep8Settings[hostname]) {
+    chrome.storage.local.get(['ep8Settings', 'ep8ApplyAllPages', 'ep8GlobalSettings'], (ep8Res) => {
+      if (ep8Res.ep8ApplyAllPages && ep8Res.ep8GlobalSettings) {
+        applyEp8Settings(ep8Res.ep8GlobalSettings);
+      } else if (ep8Res.ep8Settings && ep8Res.ep8Settings[hostname]) {
         applyEp8Settings(ep8Res.ep8Settings[hostname]);
       }
     });
@@ -179,13 +181,13 @@ const applyEp8Settings = (settings) => {
         document.head.appendChild(styleEl);
     }
     
-    document.documentElement.className = Array.from(document.documentElement.classList).filter(c => !c.startsWith('theme-')).join(' ');
-    
+    document.documentElement.className = Array.from(document.documentElement.classList).filter(c => !c.startsWith('worse-theme-')).join(' ');
+
     if (settings.theme && settings.theme !== 'none' && !settings.theme.startsWith('custom_')) {
-        document.documentElement.classList.add(`theme-${settings.theme}`);
+        document.documentElement.classList.add(`worse-theme-${settings.theme}`);
     }
     if (settings.forceDark) {
-        document.documentElement.classList.add('theme-force-dark');
+        document.documentElement.classList.add('worse-theme-force-dark');
     }
 
     const b = settings.brightness !== undefined ? settings.brightness : 100;
@@ -214,7 +216,7 @@ const applyEp8Settings = (settings) => {
     }
 
     if (hasCustomFont) {
-        document.documentElement.classList.add('theme-custom-fonts');
+        document.documentElement.classList.add('worse-theme-custom-fonts');
     }
 
     styleEl.textContent = `
@@ -224,7 +226,7 @@ const applyEp8Settings = (settings) => {
         html {
             filter: var(--ep8-filter) !important;
         }
-        html.theme-custom-fonts, html.theme-custom-fonts body, html.theme-custom-fonts p, html.theme-custom-fonts span, html.theme-custom-fonts div, html.theme-custom-fonts h1, html.theme-custom-fonts h2, html.theme-custom-fonts h3, html.theme-custom-fonts h4, html.theme-custom-fonts h5, html.theme-custom-fonts h6, html.theme-custom-fonts a, html.theme-custom-fonts li, html.theme-custom-fonts td, html.theme-custom-fonts th {
+        html.worse-theme-custom-fonts, html.worse-theme-custom-fonts body, html.worse-theme-custom-fonts p, html.worse-theme-custom-fonts span, html.worse-theme-custom-fonts div, html.worse-theme-custom-fonts h1, html.worse-theme-custom-fonts h2, html.worse-theme-custom-fonts h3, html.worse-theme-custom-fonts h4, html.worse-theme-custom-fonts h5, html.worse-theme-custom-fonts h6, html.worse-theme-custom-fonts a, html.worse-theme-custom-fonts li, html.worse-theme-custom-fonts td, html.worse-theme-custom-fonts th {
             ${fontCSS}
         }
     `;
