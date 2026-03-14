@@ -179,15 +179,30 @@ html.worse-theme-eink * {
     box-shadow: none !important;
     text-shadow: none !important;
 }
-/* Kindle Cloud Reader: undo container overrides so book blob images render properly */
-html.worse-theme-eink .kr-fullpage-body,
-html.worse-theme-eink .kr-renderer-container-fullpage,
+/* Kindle Cloud Reader: paper-toned backgrounds for the reader chrome,
+   transparent for the image containers so book blob renders correctly */
+html.worse-theme-eink body.kr-fullpage-body {
+    background: #e0e0e0 !important;
+}
 html.worse-theme-eink .kr-fullpage-app,
-html.worse-theme-eink .kg-client-root,
+html.worse-theme-eink .kr-fullpage-app ion-header,
+html.worse-theme-eink .kr-fullpage-app ion-footer,
+html.worse-theme-eink .kr-fullpage-app ion-toolbar,
+html.worse-theme-eink .kr-fullpage-app .top-chrome,
+html.worse-theme-eink .kr-fullpage-app .fixed-book-title {
+    background-color: #d8d8d8 !important;
+    color: #111 !important;
+}
+html.worse-theme-eink .kr-fullpage-app ion-title,
+html.worse-theme-eink .kr-fullpage-app ion-button,
+html.worse-theme-eink .kr-fullpage-app .fixed-book-title span,
+html.worse-theme-eink .kr-fullpage-app .footer-label {
+    color: #111 !important;
+}
+html.worse-theme-eink .kr-renderer-container-fullpage,
 html.worse-theme-eink .kg-full-page-img,
 html.worse-theme-eink .kg-view,
 html.worse-theme-eink .kr-interaction-layer-fullpage,
-html.worse-theme-eink [class*="kr-"] div,
 html.worse-theme-eink [class*="kg-"] div {
     background-color: transparent !important;
 }
