@@ -143,11 +143,55 @@ html.worse-theme-pastel, html.worse-theme-pastel body {
 html.worse-theme-pastel div { background-color: #e0bbe4 !important; border: none !important; border-radius: 10px !important; }
 html.worse-theme-pastel a { color: #d291bc !important; }
 
-/* E-Ink Theme */
+/* E-Ink Theme - newspaper/e-reader look.
+   Background only on html (not body) so Kindle reader's inline body styles aren't overridden. */
 html.worse-theme-eink {
-    filter: grayscale(100%) contrast(150%) !important;
+    filter: grayscale(100%) contrast(130%) !important;
+    background-color: #d8d8d8 !important;
+    color: #111 !important;
 }
-html.worse-theme-eink, html.worse-theme-eink body {
-    background-color: #e5e5e5 !important;
-    color: #1a1a1a !important;
+html.worse-theme-eink div,
+html.worse-theme-eink section,
+html.worse-theme-eink article,
+html.worse-theme-eink main,
+html.worse-theme-eink header,
+html.worse-theme-eink footer,
+html.worse-theme-eink nav,
+html.worse-theme-eink aside {
+    background-color: #e0e0e0 !important;
+}
+html.worse-theme-eink p, html.worse-theme-eink span, html.worse-theme-eink li,
+html.worse-theme-eink h1, html.worse-theme-eink h2, html.worse-theme-eink h3,
+html.worse-theme-eink h4, html.worse-theme-eink h5, html.worse-theme-eink h6,
+html.worse-theme-eink a, html.worse-theme-eink td, html.worse-theme-eink th,
+html.worse-theme-eink label, html.worse-theme-eink figcaption {
+    color: #111 !important;
+}
+html.worse-theme-eink a {
+    text-decoration: underline !important;
+}
+html.worse-theme-eink img, html.worse-theme-eink video, html.worse-theme-eink picture {
+    filter: contrast(120%) brightness(95%) !important;
+    mix-blend-mode: multiply;
+}
+html.worse-theme-eink * {
+    border-color: #aaa !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+/* Kindle Cloud Reader: undo container overrides so book blob images render properly */
+html.worse-theme-eink .kr-fullpage-body,
+html.worse-theme-eink .kr-renderer-container-fullpage,
+html.worse-theme-eink .kr-fullpage-app,
+html.worse-theme-eink .kg-client-root,
+html.worse-theme-eink .kg-full-page-img,
+html.worse-theme-eink .kg-view,
+html.worse-theme-eink .kr-interaction-layer-fullpage,
+html.worse-theme-eink [class*="kr-"] div,
+html.worse-theme-eink [class*="kg-"] div {
+    background-color: transparent !important;
+}
+html.worse-theme-eink .kg-full-page-img img {
+    filter: none !important;
+    mix-blend-mode: normal;
 }
