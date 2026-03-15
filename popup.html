@@ -24,6 +24,7 @@
                 <div class="compact-dropdown-item" data-episode="episode6">Ep 6: Dev Console</div>
                 <div class="compact-dropdown-item" data-episode="episode7">Ep 7: URL Parser</div>
                 <div class="compact-dropdown-item" data-episode="episode8">Ep 8: Themes</div>
+                <div class="compact-dropdown-item" data-episode="episode9">Ep 9: YT Clean</div>
               </div>
             </div>
           </div>
@@ -41,6 +42,7 @@
           <option value="episode6">Episode 6: Worse Dev Console Ever</option>
           <option value="episode7">Episode 7: Worse URL Parser Ever</option>
           <option value="episode8">Episode 8: Worst Theme Selector Ever</option>
+          <option value="episode9">Episode 9: Worst YouTube Timeline Remover Ever</option>
         </select>
       </div>
     </header>
@@ -363,8 +365,34 @@
           <button id="ep8ResetBtn" class="secondary-btn hide-compact">Reset Page Theme</button>
         </div>
       </section>
+
+      <!-- Episode 9: Worst YouTube Timeline Remover Ever -->
+      <section id="episode9" class="episode-content">
+        <div class="controls">
+          <div class="info-text hide-compact">
+            Hide YouTube overlays for clean screenshots. No more timeline bars or giant pause icons.
+          </div>
+
+          <button id="ep9ToggleBtn" class="ep9-toggle-btn" title="Toggle YouTube Clean Mode">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 7V4c0-1.1.9-2 2-2h3"/>
+              <path d="M17 2h3c1.1 0 2 .9 2 2v3"/>
+              <path d="M22 17v3c0 1.1-.9 2-2 2h-3"/>
+              <path d="M7 22H4c-1.1 0-2-.9-2-2v-3"/>
+              <polygon points="9.5,7.5 9.5,16.5 17.5,12" fill="currentColor" stroke="none"/>
+            </svg>
+            <span id="ep9StatusText">Enable Clean Mode</span>
+          </button>
+
+          <div class="info-text hide-compact" style="margin-top: 10px; font-style: italic;">
+            YouTube only. Toggle to hide controls, timeline, bezel animations &amp; overlays.
+          </div>
+        </div>
+      </section>
     </main>
-    
+
     <footer class="hide-compact">
       <p id="footerSlogan">The worst visual search experience.</p>
     </footer>

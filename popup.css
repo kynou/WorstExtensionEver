@@ -425,3 +425,47 @@ footer {
 .copy-group.hidden { display: none; }
 .copy-group .episode-select { flex-grow: 1; margin: 0; }
 .copy-group .secondary-btn { flex-shrink: 0; width: auto; padding: 6px 12px; margin-top: 0; }
+
+/* Episode 9: YouTube Clean Mode Button */
+.ep9-toggle-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-radius: var(--radius);
+  border: 2px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--muted-text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ep9-toggle-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--text-color);
+}
+
+.ep9-toggle-btn.active {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  box-shadow: 0 0 20px rgba(3, 218, 198, 0.15);
+}
+
+.ep9-toggle-btn svg {
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.ep9-toggle-btn.active svg {
+  filter: drop-shadow(0 0 4px rgba(3, 218, 198, 0.6));
+}
+
+.ep9-toggle-btn.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}

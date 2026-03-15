@@ -210,3 +210,63 @@ html.worse-theme-eink .kg-full-page-img img {
     filter: none !important;
     mix-blend-mode: normal;
 }
+
+/* =========================================
+   Episode 9: Worst YouTube Timeline Remover Ever
+   ========================================= */
+
+html.worse-yt-clean .ytp-chrome-bottom,
+html.worse-yt-clean .ytp-chrome-top,
+html.worse-yt-clean .ytp-bezel-text-wrapper,
+html.worse-yt-clean .ytp-bezel,
+html.worse-yt-clean .ytp-gradient-bottom,
+html.worse-yt-clean .ytp-gradient-top,
+html.worse-yt-clean .ytp-pause-overlay,
+html.worse-yt-clean .ytp-cards-button,
+html.worse-yt-clean .ytp-cards-teaser,
+html.worse-yt-clean .ytp-ce-element,
+html.worse-yt-clean .ytp-ce-covering-overlay,
+html.worse-yt-clean .ytp-ce-element-shadow,
+html.worse-yt-clean .ytp-ce-covering-image,
+html.worse-yt-clean .ytp-ce-expanding-image,
+html.worse-yt-clean .ytp-watermark,
+html.worse-yt-clean .ytp-iv-video-content,
+html.worse-yt-clean .ytp-title,
+html.worse-yt-clean .ytp-title-text,
+html.worse-yt-clean .ytp-doubletap-ui-legacy,
+html.worse-yt-clean .ytp-suggested-action,
+html.worse-yt-clean .ytp-suggested-action-badge,
+html.worse-yt-clean .ytp-endscreen-content,
+html.worse-yt-clean .ytp-autonav-endscreen,
+html.worse-yt-clean .ytp-autonav-endscreen-countdown-container,
+html.worse-yt-clean .iv-branding,
+html.worse-yt-clean .branding-img-container,
+html.worse-yt-clean .ytp-chapter-hover-container,
+html.worse-yt-clean .ytp-spinner,
+html.worse-yt-clean .ytp-tooltip,
+html.worse-yt-clean .ytp-popup,
+html.worse-yt-clean .ytp-settings-menu,
+html.worse-yt-clean .ytp-overflow-panel,
+html.worse-yt-clean .ytp-share-panel,
+html.worse-yt-clean .ytp-progress-bar-container,
+html.worse-yt-clean .ytp-scrubber-container,
+html.worse-yt-clean .ytp-storyboard-framepreview,
+html.worse-yt-clean .ytp-preview,
+html.worse-yt-clean .ytp-miniplayer-ui,
+html.worse-yt-clean .ytp-paid-content-overlay,
+html.worse-yt-clean .ytp-player-content,
+html.worse-yt-clean .ytp-impression-link,
+html.worse-yt-clean .video-annotations,
+html.worse-yt-clean .annotation {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+html.worse-yt-clean .html5-video-player {
+  cursor: default !important;
+}
+
+html.worse-yt-clean #cinematics {
+  display: none !important;
+}

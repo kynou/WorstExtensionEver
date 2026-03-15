@@ -75,6 +75,16 @@ const semanticCategories = {
 // --- Episode 8: Themes State ---
 const EP8_STYLE_ID = 'worse-theme-styles';
 
+// --- Episode 9: YouTube Clean Mode State ---
+let ep9Active = false;
+
+const toggleYTCleanMode = (enabled) => {
+  ep9Active = enabled;
+  if (!window.location.hostname.includes('youtube.com')) return;
+  if (enabled) document.documentElement.classList.add('worse-yt-clean');
+  else document.documentElement.classList.remove('worse-yt-clean');
+};
+
 // --- Episode 6: Worse Dev Console State ---
 let ep6Active = false;
 let devModeActive = false;
@@ -141,7 +151,7 @@ const initContentScript = () => {
   `;
   document.head.appendChild(style);
 
-  chrome.storage.local.get(['episode6Enabled', 'devModeEnabled', 'ep6Styles', 'geminiEnabled', 'chatgptEnabled', 'claudeEnabled', 'urlSwitchStates'], (res) => {
+  chrome.storage.local.get(['episode6Enabled', 'devModeEnabled', 'ep6Styles', 'geminiEnabled', 'chatgptEnabled', 'claudeEnabled', 'urlSwitchStates', 'ep9Enabled'], (res) => {
     ep6Active = res.episode6Enabled || false;
     devModeActive = res.devModeEnabled || false;
 
@@ -170,6 +180,8 @@ const initContentScript = () => {
         if (info.hidden) toggleCategoryVisibility(id, false);
       }
     }
+
+    toggleYTCleanMode(res.ep9Enabled || false);
   });
 };
 
@@ -1149,6 +1161,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     applyPersistedStyles(null);
   } else if (request.type === 'EP8_UPDATE') {
     applyEp8Settings(request.settings);
+  } else if (request.type === 'EP9_TOGGLE') {
+    toggleYTCleanMode(request.enabled);
   }
 
   sendResponse({ stats: { current: currentIdx, total: matches.length } });

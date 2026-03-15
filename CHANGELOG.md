@@ -1,5 +1,31 @@
 # Changelog
 
+## 2026-03-14 — Episode 9: Worst YouTube Timeline Remover Ever
+
+### What's New
+Added Episode 9 — a YouTube-only clean screenshot mode that hides all video player overlays (controls bar, timeline, bezel play/pause animation, gradients, title bar, end screens, annotations, watermarks, ambient glow, and more).
+
+### How It Works
+- Toggle button in the popup with an SVG viewfinder icon
+- Adds a `worse-yt-clean` CSS class to `<html>` on YouTube pages
+- 40+ YouTube player selectors hidden via `opacity: 0 !important; visibility: hidden !important; pointer-events: none !important` in `content.css`
+- Video continues playing normally — only the UI chrome is hidden
+- Button auto-disables with "YouTube Only" label on non-YouTube pages
+- State persisted globally via `chrome.storage.local` key `ep9Enabled`
+
+### Files Modified
+| File | Changes |
+|------|---------|
+| `manifest.json` | Version bump to 1.0.4 |
+| `popup.html` | Added Episode 9 section, compact dropdown entry, episode selector option |
+| `popup.css` | Added `.ep9-toggle-btn` styles (hover glow, active state, disabled state) |
+| `popup.js` | Added Episode 9 toggle logic, storage persistence, YouTube-only guard |
+| `content.js` | Added `toggleYTCleanMode()` function, `EP9_TOGGLE` message handler, init load |
+| `content.css` | Added 60-line YouTube clean mode CSS block targeting `.ytp-*` selectors |
+| `DOCUMENTATION.md` | Documented Episode 9 feature, selectors, and storage keys |
+
+---
+
 ## 2026-03-13 — Google Sites Embed: Download Button Fix + White Gap Fix
 
 ### Problem

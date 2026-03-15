@@ -67,7 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
       episode5: "The worst visibility control hub.",
       episode6: "The worst developer console experience.",
       episode7: "The worst URL breakdown.",
-      episode8: "The worst aesthetic choices ever."
+      episode8: "The worst aesthetic choices ever.",
+      episode9: "The worst screenshot cleanup tool."
     };
     footerSlogan.textContent = slogans[episodeId] || "The worst extension hub.";
     
@@ -98,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'quakeIntensity', 'magnifyActive', 'magnifierBlur', 'magnifierZoom',
       'geminiEnabled', 'chatgptEnabled', 'claudeEnabled', 'urlSwitchStates',
       'episode6Enabled', 'devModeEnabled', 'ep8Settings', 'ep8CustomThemes',
-      'ep8ApplyAllPages', 'ep8GlobalSettings'
+      'ep8ApplyAllPages', 'ep8GlobalSettings', 'ep9Enabled'
     ];
 
     chrome.storage.local.get(keys, (res) => {
@@ -167,6 +168,12 @@ document.addEventListener('DOMContentLoaded', () => {
       // Episode 8: Apply All Pages toggle
       if (res.ep8ApplyAllPages !== undefined) {
         document.getElementById('ep8ApplyAllPages').checked = res.ep8ApplyAllPages;
+      }
+
+      // Episode 9: YouTube Clean Mode
+      if (res.ep9Enabled !== undefined) {
+        ep9Active = res.ep9Enabled;
+        updateEp9UI(ep9Active);
       }
 
       getHostname((hostname) => {
@@ -779,6 +786,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
   }
+
+  // --- Episode 9: YouTube Clean Mode ---
+  let ep9Active = false;
+  const ep9ToggleBtn = document.getElementById('ep9ToggleBtn');
+  const ep9StatusText = document.getElementById('ep9StatusText');
+
+  const updateEp9UI = (active) => {
+    if (active) {
+      ep9ToggleBtn.classList.add('active');
+      ep9StatusText.textContent = 'Clean Mode Active';
+    } else {
+      ep9ToggleBtn.classList.remove('active');
+      ep9StatusText.textContent = 'Enable Clean Mode';
+    }
+  };
+
+  ep9ToggleBtn.addEventListener('click', () => {
+    ep9Active = !ep9Active;
+    chrome.storage.local.set({ ep9Enabled: ep9Active });
+    updateEp9UI(ep9Active);
+    sendMessageToContentScript({ type: 'EP9_TOGGLE', enabled: ep9Active });
+  });
+
+  // Disable button on non-YouTube pages
+  getHostname((hostname) => {
+    if (!hostname || !hostname.includes('youtube.com')) {
+      ep9ToggleBtn.classList.add('disabled');
+      ep9StatusText.textContent = 'YouTube Only';
+      ep9ToggleBtn.disabled = true;
+    }
+  });
 
   initTheme();
   loadSettings();
